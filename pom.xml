@@ -1,0 +1,33 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!-- Versão do Modelo do POM, sempre 4.0.0 para o Maven 2 e 3 -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Coordenadas do Projeto: identificam unicamente o seu projeto -->
+    <groupId>br.com.anhembi</groupId>
+    <artifactId>Team_Management</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <!-- Propriedades do projeto, como a versão do Java -->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+    </properties>
+
+    <!-- Seção para adicionar as bibliotecas (dependências) -->
+    <dependencies>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-crypto</artifactId>
+            <version>6.4.4</version>
+        </dependency>
+    </dependencies>
+</project>
