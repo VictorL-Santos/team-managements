@@ -1,40 +1,64 @@
 package br.com.anhembi.model.product;
 
+import br.com.anhembi.model.Board;
 import br.com.anhembi.model.product.demand.Demand;
+import br.com.anhembi.model.product_owner.ProductOwner;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Product {
-    private String name;
-    private String description;
-    private String productOwnerCpf;
+public class Product extends Board {
+    private ProductOwner productOwner;
     private List<Demand> demandList;
 
-    public Product(String name, String description, String productOwnerCpf) {
-        this.name = name;
-        this.description = description;
-        this.productOwnerCpf = productOwnerCpf;
+    public Product(String title, String description) {
+        super(title, description);
+
+        this.productOwner = null;
+        this.demandList = new ArrayList<>();
     }
 
     // Getters
-    public String getName() {
-        return name;
+    public ProductOwner getProductOwner() {
+        return productOwner;
     }
-    public String getDescription() {
-        return description;
-    }
-    public String getProductOwnerCpf() {
-        return productOwnerCpf;
+
+    public List<Demand> getDemandList() {
+        return demandList;
     }
 
     // Setters
-    public void setName(String name) {
-        this.name = name;
+    public void setProductOwner(ProductOwner newProductOwner) {
+        this.productOwner = newProductOwner;
     }
-    public void setDescription(String description) {
-        this.description = description;
+
+    public void setDemandList(List<Demand> newDemandList) {
+        this.demandList = newDemandList;
     }
-    public void setProductOwnerCpf(String productOwnerCpf) {
-        this.productOwnerCpf = productOwnerCpf;
+
+    // Métodos \\
+    /**
+     * Adiciona uma demanda à lista de demandas do produto.
+     * Este operacao ocorre somente na memória local
+     *
+     * @param demandToAdd A demanda a ser adicionada.
+     */
+    public boolean createDemand(Demand demandToAdd) {
+        if (demandList.contains(demandToAdd)) return false;
+
+        return this.demandList.add(demandToAdd);
+    }
+
+    /**
+     * Deleta uma demanda da lista de demandas do produto.
+     * Deleta todas as tasks relacionadas a essa demanda.
+     * Este operacao ocorre somente na memória local
+     *
+     * @param demandToDelete A demanda a ser deletada.
+     */
+    public boolean deleteDemand(Demand demandToDelete) {
+        if (this.demandList.contains(demandToDelete)) return this.demandList.remove(demandToDelete);
+
+        return false;
     }
 }

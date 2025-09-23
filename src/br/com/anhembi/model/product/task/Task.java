@@ -1,45 +1,44 @@
 package br.com.anhembi.model.product.task;
 
-public class Task {
-    private String title;
-    private String description;
-    private String assignedDeveloperCpf;
-    private final Integer taskPoints;
-    private final String demandId;
+import br.com.anhembi.model.Board;
+import br.com.anhembi.model.developer.Developer;
+import br.com.anhembi.model.enums.ScrumStatusEnum;
+import br.com.anhembi.model.product.demand.Demand;
 
-    public Task(String title, String description, String assignedDeveloperCpf, String demandId, Integer taskPoints) {
-        this.title = title;
-        this.description = description;
-        this.assignedDeveloperCpf = assignedDeveloperCpf;
-        this.demandId = demandId;
+public class Task extends Board {
+    private ScrumStatusEnum status;
+    private Developer assignedDeveloper;
+    private final Demand demand;
+    private final Integer taskPoints;
+
+    public Task(String title, String description, Demand demand, Integer taskPoints) {
+        super(title, description);
+
+        this.demand = demand;
         this.taskPoints = taskPoints;
+        this.status = ScrumStatusEnum.TO_DO;
+        this.assignedDeveloper = null;
     }
 
     // -- GETTER PARA TODOS OS CAMPOS -- \\
-    public String getTitle() {
-        return title;
+    public Developer getAssignedDeveloper() {
+        return assignedDeveloper;
     }
-    public String getDescription() {
-        return description;
+    public ScrumStatusEnum getStatus() {
+        return status;
     }
-    public String getAssignedDeveloperCpf() {
-        return assignedDeveloperCpf;
-    }
-    public  Integer getTaskPoints() {
+    public Integer getTaskPoints() {
         return taskPoints;
     }
-    public String getDemandId() {
-        return demandId;
+    public Demand getDemand() {
+        return demand;
     }
 
     // -- SETTER PARA CAMPOS MUTÁVEIS -- \\
-    public void setTitle(String newTitle) {
-        this.title = newTitle;
+    public void setAssignedDeveloper(Developer newAssignedDeveloper) {
+        this.assignedDeveloper = newAssignedDeveloper;
     }
-    public void setDescription(String newDescription) {
-        this.description = newDescription;
-    }
-    public void setAssignedDeveloperCpf(String newAssignedDeveloperCpf) {
-        this.assignedDeveloperCpf = newAssignedDeveloperCpf;
+    public void setStatus(ScrumStatusEnum newStatus) {
+        this.status = newStatus;
     }
 }

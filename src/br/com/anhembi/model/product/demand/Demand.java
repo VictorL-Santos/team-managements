@@ -1,47 +1,64 @@
 package br.com.anhembi.model.product.demand;
 
+import br.com.anhembi.model.Board;
 import br.com.anhembi.model.enums.ScrumStatusEnum;
+import br.com.anhembi.model.product.Product;
 import br.com.anhembi.model.product.task.Task;
+import br.com.anhembi.model.tech_lead.TechLead;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Demand {
-    private String title;
-    private ScrumStatusEnum status;
-    private String assignedTechLeadCpf;
+public class Demand extends Board {
     private List<Task> taskList;
-    private final String productId;
+    private ScrumStatusEnum status;
+    private TechLead assignedTechLead;
+    private final Product product;
 
 
-    public Demand(String title, ScrumStatusEnum status, String assignedTechLeadCpf, String productId) {
-        this.title = title;
-        this.status = status;
-        this.assignedTechLeadCpf = assignedTechLeadCpf;
-        this.productId = productId;
+    public Demand(String title, String description, Product product) {
+        super(title, description);
+        this.product = product;
+
+        this.status = ScrumStatusEnum.TO_DO;
+        this.taskList = new ArrayList<>();
+        this.assignedTechLead = null;
     }
 
     // Getters
-    public String getTitle() {
-        return title;
-    }
     public ScrumStatusEnum getStatus() {
         return status;
     }
-    public String getAssignedDeveloperCpf() {
-        return assignedTechLeadCpf;
+    public TechLead getAssignedTechLead() {
+        return assignedTechLead;
     }
-    public String getProductId() {
-        return productId;
+    public List<Task> getTaskList() {
+        return taskList;
+    }
+    public Product getProduct() {
+        return product;
     }
 
     // Setters
-    public void setTitle(String title) {
-        this.title = title;
-    }
     public void setStatus(ScrumStatusEnum status) {
         this.status = status;
     }
-    public void setAssignedTechLeadCpf(String assignedTechLeadCpf) {
-        this.assignedTechLeadCpf = assignedTechLeadCpf;
+    public void setAssignedTechLead(TechLead newAssignedTechLead) {
+        this.assignedTechLead = newAssignedTechLead;
+    }
+    public void setTaskList(List<Task> newTaskList) {
+        this.taskList = newTaskList;
+    }
+
+    // Métodos \\
+    public boolean createTask(Task taskToAdd) {
+        if(this.taskList.contains(taskToAdd)) return false;
+
+        return this.taskList.add(taskToAdd);
+    }
+    public boolean deleteTask(Task taskToDelete) {
+        if(this.taskList.contains(taskToDelete)) return this.taskList.remove(taskToDelete);
+
+        return false;
     }
 }
