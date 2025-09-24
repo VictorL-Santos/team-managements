@@ -7,20 +7,19 @@ import br.com.anhembi.model.tech_lead.TechLead;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Developer extends Users {
     private TechLead techLead;
     private List<Task> assignedTasks;
 
-    public Developer(Long id, String login, String password, String cpf, UserProfileEnum role, String email) {
+    public Developer(Long id, String login, String password, String cpf, String email) {
         super(id, login, password, cpf, UserProfileEnum.DEVELOPER, email);
 
         this.techLead = null;
         this.assignedTasks = new ArrayList<>();
     }
 
-    public Developer(String login, String password, String cpf, UserProfileEnum role, String email) {
+    public Developer(String login, String password, String cpf, String email) {
         super(null, login, password, cpf, UserProfileEnum.DEVELOPER, email);
 
         this.techLead = null;
@@ -38,5 +37,8 @@ public class Developer extends Users {
     // -- SETTER -- \\
     public void setAssignedTasks(List<Task> newAssignedTasks) {
         this.assignedTasks = newAssignedTasks;
+    }
+    public void setTechLead(TechLead newTechLead) {
+        this.techLead = newTechLead;
     }
 }

@@ -4,25 +4,29 @@ import br.com.anhembi.model.Users;
 import br.com.anhembi.model.developer.Developer;
 import br.com.anhembi.model.enums.UserProfileEnum;
 import br.com.anhembi.model.product.demand.Demand;
+import br.com.anhembi.model.product_owner.ProductOwner;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class TechLead extends Users {
+    private ProductOwner productOwner;
     private List<Developer> managedTeam;
     private List<Demand> managedDemands;
 
-    public TechLead(Long id, String login, String password, String cpf, String email, List<Developer> managedTeam, List<Demand> managedDemands) {
+    public TechLead(Long id, String login, String password, String cpf, String email) {
         super(id, login, password, cpf, UserProfileEnum.TECH_LEAD, email);
 
-        this.managedTeam = Objects.requireNonNullElseGet(managedTeam, ArrayList::new);
-        this.managedDemands = Objects.requireNonNullElseGet(managedDemands, ArrayList::new);
+        this.productOwner = null;
+        this.managedTeam = new ArrayList<>();
+        this.managedDemands = new ArrayList<>();
     }
 
     public TechLead(String login, String password, String cpf, String email) {
         super(null, login, password, cpf, br.com.anhembi.model.enums.UserProfileEnum.TECH_LEAD, email);
 
+        this.productOwner = null;
         this.managedTeam = new ArrayList<>();
         this.managedDemands = new ArrayList<>();
     }
@@ -36,6 +40,10 @@ public class TechLead extends Users {
         return managedDemands;
     }
 
+    public ProductOwner getProductOwner() {
+        return productOwner;
+    }
+
     // -- SETTER -- \\
     public void setManagedTeam(List<Developer> newManagedTeam) {
         this.managedTeam = newManagedTeam;
@@ -44,6 +52,11 @@ public class TechLead extends Users {
     public void setManagedDemands(List<Demand> newManagedDemands) {
         this.managedDemands = newManagedDemands;
     }
+
+    public void setProductOwner(ProductOwner newProductOwner) {
+        this.productOwner = newProductOwner;
+    }
+
 
     // -- MÉTODOS -- \\
 

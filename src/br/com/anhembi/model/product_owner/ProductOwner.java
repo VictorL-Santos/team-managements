@@ -12,22 +12,19 @@ import java.util.Objects;
 public class ProductOwner extends Users {
     private List<TechLead> managedTechLeads;
     private List<Product> ownedProducts;
-    private String businessUnit;
 
-    public ProductOwner(Long id, String login, String password, String cpf, String email, List<TechLead> managedTechLeads, List<Product> ownedProducts, String businessUnit) {
+    public ProductOwner(Long id, String login, String password, String cpf, String email) {
         super(id, login, password, cpf, UserProfileEnum.PRODUCT_OWNER, email);
 
-        this.managedTechLeads = Objects.requireNonNullElseGet(managedTechLeads, ArrayList::new);
-        this.ownedProducts = Objects.requireNonNullElseGet(ownedProducts, ArrayList::new);
-        this.businessUnit = businessUnit;
+        this.managedTechLeads = new ArrayList<>();
+        this.ownedProducts = new ArrayList<>();
     }
 
-    public ProductOwner(String login, String password, String cpf, String email, String businessUnit) {
+    public ProductOwner(String login, String password, String cpf, String email) {
         super(null, login, password, cpf, UserProfileEnum.PRODUCT_OWNER, email);
 
         this.managedTechLeads = new ArrayList<>();
         this.ownedProducts = new ArrayList<>();
-        this.businessUnit = businessUnit;
     }
 
     // GETTER \\
@@ -39,10 +36,6 @@ public class ProductOwner extends Users {
         return ownedProducts;
     }
 
-    public String getBusinessUnit() {
-        return businessUnit;
-    }
-
     // SETTER \\
     public void setManagedTechLeads(List<TechLead> newManagedTechLeads) {
         this.managedTechLeads = newManagedTechLeads;
@@ -50,10 +43,6 @@ public class ProductOwner extends Users {
 
     public void setOwnedProducts(List<Product> newOwnedProducts) {
         this.ownedProducts = newOwnedProducts;
-    }
-
-    public void setBusinessUnit(String newBusinessUnit) {
-        this.businessUnit = newBusinessUnit;
     }
 
     // MÉTODOS \\

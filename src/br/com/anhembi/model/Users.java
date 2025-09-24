@@ -41,6 +41,9 @@ public abstract class Users {
     public String getPassword() {
         return password;
     }
+    public Long getId() {
+        return id;
+    }
 
     // -- SETTER PARA CAMPOS MUTÁVEIS -- \\
     public void setLogin(String newLogin) {

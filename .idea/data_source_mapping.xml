@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourcePerFileMappings">
+    <file url="file://$PROJECT_DIR$/src/br/com/anhembi/dao/board/DemandDAOImpl.java" value="afcecf37-1791-46ed-ba60-abc9fbdcef75" />
+    <file url="file://$PROJECT_DIR$/src/br/com/anhembi/dao/board/ProductDAOImpl.java" value="afcecf37-1791-46ed-ba60-abc9fbdcef75" />
+    <file url="file://$PROJECT_DIR$/src/br/com/anhembi/dao/board/TaskDAOImpl.java" value="afcecf37-1791-46ed-ba60-abc9fbdcef75" />
+  </component>
+</project>

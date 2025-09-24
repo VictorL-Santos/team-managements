@@ -6,6 +6,7 @@ import br.com.anhembi.model.product_owner.ProductOwner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Product extends Board {
     private ProductOwner productOwner;
@@ -15,6 +16,11 @@ public class Product extends Board {
         super(title, description);
 
         this.productOwner = null;
+        this.demandList = new ArrayList<>();
+    }
+
+    public Product(UUID id, String title, String description) {
+        super(id, title, description);
         this.demandList = new ArrayList<>();
     }
 
