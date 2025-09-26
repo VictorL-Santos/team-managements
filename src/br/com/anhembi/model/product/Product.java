@@ -11,17 +11,19 @@ import java.util.UUID;
 public class Product extends Board {
     private ProductOwner productOwner;
     private List<Demand> demandList;
+    private final Long productOwnerId;
 
-    public Product(String title, String description) {
+    public Product(String title, String description, Long productOwnerId) {
         super(title, description);
-
         this.productOwner = null;
         this.demandList = new ArrayList<>();
+        this.productOwnerId = productOwnerId;
     }
 
-    public Product(UUID id, String title, String description) {
+    public Product(UUID id, String title, String description, Long productOwnerId) {
         super(id, title, description);
         this.demandList = new ArrayList<>();
+        this.productOwnerId = productOwnerId;
     }
 
     // Getters
@@ -33,6 +35,10 @@ public class Product extends Board {
         return demandList;
     }
 
+    public Long getProductOwnerId() {
+        return productOwnerId;
+    }
+
     // Setters
     public void setProductOwner(ProductOwner newProductOwner) {
         this.productOwner = newProductOwner;
@@ -42,7 +48,9 @@ public class Product extends Board {
         this.demandList = newDemandList;
     }
 
+
     // Métodos \\
+
     /**
      * Adiciona uma demanda à lista de demandas do produto.
      * Este operacao ocorre somente na memória local

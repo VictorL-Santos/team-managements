@@ -12,18 +12,24 @@ public class Task extends Board {
     private ScrumStatusEnum status;
     private Developer assignedDeveloper;
     private final Integer taskPoints;
+    private final UUID demandId;
+    private final Long developerId;
 
-    public Task(String title, String description, Demand demand, Integer taskPoints) {
+    public Task(String title, String description, Demand demand, Integer taskPoints, UUID demandId, Long developerId) {
         super(title, description);
         this.demand = demand;
         this.taskPoints = taskPoints;
+        this.demandId = demandId;
+        this.developerId = developerId;
         this.status = ScrumStatusEnum.TO_DO;
         this.assignedDeveloper = null;
     }
 
-    public Task(UUID id, String title, String description, Integer taskPoints) {
+    public Task(UUID id, String title, String description, Integer taskPoints, Long developerId, UUID demandId) {
         super(id, title, description);
         this.taskPoints = taskPoints;
+        this.demandId = demandId;
+        this.developerId = developerId;
         this.status = ScrumStatusEnum.TO_DO;
     }
 
@@ -40,6 +46,13 @@ public class Task extends Board {
     public Demand getDemand() {
         return demand;
     }
+    public UUID getDemandId() {
+        return demandId;
+    }
+    public Long getDeveloperId() {
+        return developerId;
+    }
+
 
     // -- SETTERS --
     public void setAssignedDeveloper(Developer newAssignedDeveloper) {

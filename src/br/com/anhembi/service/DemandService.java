@@ -1,13 +1,9 @@
 package br.com.anhembi.service;
 
-import br.com.anhembi.dao.board.DemandDAO;
-import br.com.anhembi.dao.board.DemandDAOImpl;
-import br.com.anhembi.dao.board.ProductDAO;
-import br.com.anhembi.dao.board.ProductDAOImpl;
-import br.com.anhembi.dao.board.TaskDAO;
-import br.com.anhembi.dao.board.TaskDAOImpl;
+import br.com.anhembi.dao.board.*;
 import br.com.anhembi.dao.user.UserDAO;
 import br.com.anhembi.dao.user.UserDAOImpl;
+import br.com.anhembi.model.Users;
 import br.com.anhembi.model.enums.ScrumStatusEnum;
 import br.com.anhembi.model.product.Product;
 import br.com.anhembi.model.product.demand.Demand;
@@ -29,14 +25,13 @@ public class DemandService {
     /**
      * Cria uma nova demanda para um produto existente.
      */
-    public Demand createNewDemand(String title, String description, UUID productId) throws Exception {
+    public void createNewDemand(String title, String description, Long techLeadId, UUID productId) throws Exception {
         Product product = productDAO.findById(productId)
                 .orElseThrow(() -> new Exception("Produto com ID " + productId + " não encontrado."));
 
-        Demand newDemand = new Demand(title, description, product);
+        Demand newDemand = new Demand(title, description, product, techLeadId, productId);
 
         demandDAO.save(newDemand);
-        return newDemand;
     }
 
     /**
@@ -86,5 +81,9 @@ public class DemandService {
     public void deleteDemand(UUID id) {
         // Adicionar lógica de negócio aqui, se necessário
         demandDAO.deleteById(id);
+    }
+
+    public List<Demand> getAllDemands() {
+        return demandDAO.findAll();
     }
 }

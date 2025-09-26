@@ -28,6 +28,13 @@ public interface UserDAO {
     Optional<Users> findByLogin(String login);
 
     /**
+     * Busca um usuário pelo hash do seu CPF.
+     * @param cpfHash O hash do CPF a ser buscado.
+     * @return Um Optional contendo o usuário se encontrado.
+     */
+    Optional<Users> findByCpfHash(String cpfHash);
+
+    /**
      * Busca todos os usuários que pertencem a um determinado role
      * @param role O valor para filtrar os usuários
      * @return Uma lista de objetos Users. A lista estará vazia se nenhum for encontrado, mas nunca será nula

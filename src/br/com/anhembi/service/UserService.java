@@ -12,6 +12,8 @@ import br.com.anhembi.model.product.task.Task;
 import br.com.anhembi.model.product_owner.ProductOwner;
 import br.com.anhembi.model.tech_lead.TechLead;
 import br.com.anhembi.security.PasswordUtils;
+import br.com.anhembi.service.exception.AuthenticationException;
+import br.com.anhembi.service.exception.UserNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,6 +38,9 @@ public class UserService {
     public void registerNewUser(String login, String password, String cpf, String email, UserProfileEnum role) throws Exception {
         if (login.length() < 5) throw new Exception("Login deve ter pelo menos 5 caracteres.");
         if (password.length() < 8) throw new Exception("Senha deve ter pelo menos 8 caracteres.");
+        if (cpf == null) throw new Exception("Formato de CPF inválido");
+
+        if (userDAO.findByCpfHash(cpf).isPresent()) throw new Exception("Já existe um usuário com o CPF informado");
 
         String hashSenha = PasswordUtils.hashPassword(password);
 
@@ -61,16 +66,14 @@ public class UserService {
      * @return Um Optional contendo o objeto Users se a autenticação for bem-sucedida,
      * ou um Optional vazio caso contrário.
      */
-    public Optional<Users> authenticateUsers(String login, String password) {
-        Optional<Users> optionalUser = userDAO.findByLogin(login);
+    public Users authenticateUsers(String login, String password) throws AuthenticationException, UserNotFoundException {
+        Users user = userDAO.findByLogin(login).orElseThrow(() -> new UserNotFoundException("Usuário com login  '" + login + "' não encontrado."));
 
-        if (optionalUser.isPresent()) {
-            Users user = optionalUser.get();
-
-            if (PasswordUtils.checkPassword(password, user.getPassword())) return Optional.of(user);
+        if (!PasswordUtils.checkPassword(password, user.getPassword())) {
+            throw new AuthenticationException("Senha incorreta.");
         }
 
-        return Optional.empty();
+        return user;
     }
 
     /**

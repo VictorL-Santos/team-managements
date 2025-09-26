@@ -147,6 +147,28 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
+    public Optional<Users> findByCpfHash(String cpfHash) {
+        String sql = "SELECT * FROM users WHERE cpf_hash = ?";
+
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setString(1, cpfHash);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    UserProfileEnum userRole = UserProfileEnum.valueOf(resultSet.getString("role"));
+                    Users user = CreateUserObject(resultSet, userRole);
+                    return Optional.ofNullable(user);
+                }
+            }
+        } catch (SQLException error) {
+            LOGGER.log(Level.SEVERE, "Erro ao buscar usuário por hash de CPF.", error);
+        }
+        return Optional.empty();
+    }
+
+    @Override
     public void deleteById(Long id) {
         String sql = "DELETE FROM users WHERE id = ?";
 

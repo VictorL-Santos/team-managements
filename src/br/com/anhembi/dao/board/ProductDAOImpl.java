@@ -165,7 +165,8 @@ public class ProductDAOImpl implements ProductDAO {
         return new Product(
                 resultSet.getObject("id", UUID.class),
                 resultSet.getString("title"),
-                resultSet.getString("description")
+                resultSet.getString("description"),
+                resultSet.getLong("product_owner_id")
         );
     }
 }

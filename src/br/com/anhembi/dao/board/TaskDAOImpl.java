@@ -191,7 +191,9 @@ public class TaskDAOImpl implements TaskDAO {
                 resultSet.getObject("id", UUID.class),
                 resultSet.getString("title"),
                 resultSet.getString("description"),
-                resultSet.getInt("task_points")
+                resultSet.getInt("task_points"),
+                resultSet.getLong("assigned_developer_id"),
+                resultSet.getObject("demand_id", UUID.class)
         );
         task.setStatus(ScrumStatusEnum.valueOf(resultSet.getString("status")));
 

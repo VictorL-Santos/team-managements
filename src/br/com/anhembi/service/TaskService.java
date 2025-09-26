@@ -11,6 +11,7 @@ import br.com.anhembi.model.enums.ScrumStatusEnum;
 import br.com.anhembi.model.product.demand.Demand;
 import br.com.anhembi.model.product.task.Task;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -26,14 +27,18 @@ public class TaskService {
     /**
      * Cria uma nova tarefa para uma demanda existente.
      */
-    public Task createNewTask(String title, String description, int taskPoints, UUID demandId) throws Exception {
+    public Task createNewTask(String title, String description, int taskPoints, UUID demandId, Long developerId) throws Exception {
         Demand demand = demandDAO.findById(demandId)
                 .orElseThrow(() -> new Exception("Demanda com ID " + demandId + " não encontrada."));
 
-        Task newTask = new Task(title, description, demand, taskPoints);
+        Task newTask = new Task(title, description, demand, taskPoints, demandId, developerId);
 
         taskDAO.save(newTask);
         return newTask;
+    }
+
+    public List<Task> getAllTasks() {
+        return taskDAO.findAll();
     }
 
     /**

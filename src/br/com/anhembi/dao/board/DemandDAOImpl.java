@@ -181,7 +181,9 @@ public class DemandDAOImpl implements DemandDAO {
         Demand demand = new Demand(
                 resultSet.getObject("id", UUID.class),
                 resultSet.getString("title"),
-                resultSet.getString("description")
+                resultSet.getString("description"),
+                resultSet.getLong("assigned_tech_lead_id"),
+                resultSet.getObject("product_id", UUID.class)
         );
         demand.setStatus(ScrumStatusEnum.valueOf(resultSet.getString("status")));
 

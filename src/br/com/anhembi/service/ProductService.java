@@ -26,7 +26,7 @@ public class ProductService {
     /**
      * Cria um novo produto e o associa a um Product Owner.
      */
-    public Product createNewProduct(String title, String description, Long ownerId) throws Exception {
+    public void createNewProduct(String title, String description, Long ownerId) throws Exception {
         if (title == null || title.trim().isEmpty()) {
             throw new Exception("O título do produto não pode ser vazio.");
         }
@@ -35,11 +35,10 @@ public class ProductService {
                 .filter(user -> user instanceof ProductOwner)
                 .orElseThrow(() -> new Exception("Product Owner com ID " + ownerId + " não encontrado."));
 
-        Product newProduct = new Product(title, description);
+        Product newProduct = new Product(title, description, ownerId);
         newProduct.setProductOwner(owner);
 
         productDAO.save(newProduct);
-        return newProduct;
     }
 
     /**

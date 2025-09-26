@@ -4,7 +4,6 @@ import br.com.anhembi.model.enums.ScrumStatusEnum;
 import br.com.anhembi.model.product.demand.Demand;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 public interface DemandDAO extends GenericBoardDAO<Demand, UUID> {

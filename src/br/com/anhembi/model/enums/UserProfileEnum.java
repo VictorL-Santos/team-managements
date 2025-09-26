@@ -1,7 +1,6 @@
 package br.com.anhembi.model.enums;
 
 public enum UserProfileEnum {
-    ADMIN("Administrador"),
     TECH_LEAD("Gestor Técnico"),
     DEVELOPER("Desenvolvedor"),
     PRODUCT_OWNER("Gestor de Produto");
@@ -16,3 +15,4 @@ public enum UserProfileEnum {
         return description;
     }
 }
+

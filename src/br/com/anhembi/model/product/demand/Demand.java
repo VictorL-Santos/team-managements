@@ -14,10 +14,14 @@ public class Demand extends Board {
     private List<Task> taskList;
     private ScrumStatusEnum status;
     private TechLead assignedTechLead;
-    private Product product; // REMOVIDO O 'final'
+    private Product product;
+    private final Long techLeadId;
+    private final UUID productId;
 
-    public Demand(String title, String description, Product product) {
+    public Demand(String title, String description, Product product, Long techLeadId, UUID productId) {
         super(title, description);
+        this.techLeadId = techLeadId;
+        this.productId = productId;
         this.product = product;
         this.status = ScrumStatusEnum.TO_DO;
         this.taskList = new ArrayList<>();
@@ -27,8 +31,10 @@ public class Demand extends Board {
     /**
      * Construtor para recriar um objeto Demand a partir do banco de dados.
      */
-    public Demand(UUID id, String title, String description) {
+    public Demand(UUID id, String title, String description, Long techLeadId, UUID productId) {
         super(id, title, description);
+        this.techLeadId = techLeadId;
+        this.productId = productId;
         this.taskList = new ArrayList<>();
         this.status = ScrumStatusEnum.TO_DO;
     }
@@ -45,6 +51,12 @@ public class Demand extends Board {
     }
     public Product getProduct() {
         return product;
+    }
+    public Long getTechLeadId() {
+        return techLeadId;
+    }
+    public UUID getProductId() {
+        return productId;
     }
 
     // Setters
